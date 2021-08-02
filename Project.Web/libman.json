@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "angular.js@1.8.2",
+      "destination": "wwwroot/angular.js/"
+    },
+    {
+      "library": "angular-route@1.8.2",
+      "destination": "wwwroot/angular-route/"
+    }
+  ]
+}
