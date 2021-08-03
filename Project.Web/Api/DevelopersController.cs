@@ -8,6 +8,7 @@ using Project.Domain.Developers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Project.Web.Api
@@ -21,7 +22,7 @@ namespace Project.Web.Api
         public DevelopersController(IDataBaseContext context)
         {
             _context = context;
-        }           
+        }
 
         /// <summary>
         /// Get devs with filters
@@ -33,20 +34,20 @@ namespace Project.Web.Api
         /// <param name="take"></param>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult GetDevelopers(string name, string hobby, Sex? sex, int skip = 0, int take = 10)
+        public IActionResult GetDevelopers(Sex? sex, string name, string hobby, int skip = 0, int take = 10)
         {
-            var devs = _context.Developers.Skip(skip).Take(take);
+            IQueryable<Developer> devs = _context.Developers.Skip(skip).Take(take);
 
-            devs = devs.Where(d => d.Name.Contains(name));
-            devs = devs.Where(d => d.Hobby.Contains(hobby));
+            if (IsValidString(name))
+                devs = devs.Where(d => d.Name.Contains(name));
+
+            if (IsValidString(hobby))
+                devs = devs.Where(d => d.Hobby.Contains(hobby));
 
             if (sex != null)
                 devs = devs.Where(d => d.Sex == sex);
 
-            if (!devs.Any())
-                return NotFound();
-
-            return Ok(devs);
+            return devs.Any() ? Ok(devs) : NotFound();
         }
 
         /// <summary>
@@ -71,6 +72,7 @@ namespace Project.Web.Api
         /// <param name="developer"></param>
         /// <returns></returns>
         [HttpPost]
+        [ProducesResponseType(typeof(Developer), 201)]
         public IActionResult NewDeveloper(Developer developer)
         {
             try
@@ -78,7 +80,7 @@ namespace Project.Web.Api
                 _context.Add(developer);
                 _context.SaveChanges();
 
-                return Created(new Uri("api/developers"), developer);
+                return new ObjectResult(developer) { StatusCode = StatusCodes.Status201Created };
             }
             catch (Exception e)
             {
@@ -91,15 +93,16 @@ namespace Project.Web.Api
         /// </summary>
         /// <param name="developer"></param>
         /// <returns></returns>
-        [HttpPut]
-        public IActionResult UpdateDeveloper([FromBody] Developer developer)
+        [HttpPut, Route("{id}")]
+        public IActionResult UpdateDeveloper(int id, [FromBody] Developer developer)
         {
             try
             {
+                developer.Id = id;
                 _context.Update(developer);
                 _context.SaveChanges();
 
-                return Created(new Uri("api/developers"), developer);
+                return new ObjectResult(developer) { StatusCode = StatusCodes.Status201Created };
             }
             catch (Exception e)
             {
@@ -128,6 +131,14 @@ namespace Project.Web.Api
             {
                 return BadRequest("Exception: " + e);
             }
+        }
+
+        private static bool IsValidString(string value)
+        {
+            if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
+                return false;
+
+            return true;
         }
     }
 }

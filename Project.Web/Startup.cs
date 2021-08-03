@@ -47,7 +47,7 @@ namespace Project.Web
 
             services.AddSwaggerGen();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson();
         }
 
 

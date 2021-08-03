@@ -1,10 +1,97 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Dev-detail</title>
-</head>
-<body>
-    aaaaadafhrfgjtjt
-</body>
-</html>
+﻿
+<form class="form-group"
+      ng-init="getDev()"
+      ng-submit="saveDev()">
+
+    <div class="row">
+        <div class="col-sm-10">
+
+        </div>
+
+        <div class="col-sm-1">
+            <button class="btn btn-sm btn-outline-success">
+                <i class="fa fa-check-square"></i>
+            </button>
+        </div>
+
+        <div class="col-sm-1">
+            <button type="button"
+                    ng-click="deleteDev()"
+                    class="btn btn-sm btn-outline-danger"
+                    title="Excluir desenvolvedor">
+                <i class="fa fa-user-minus"></i>
+
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <label for="name">
+                Nome
+            </label>
+            <input type="text"
+                   id="name"
+                   ng-model="dev.name"
+                   class="form-control"
+                   required />
+        </div>
+
+        <div class="col-sm-3">
+            <label for="sexo">
+                Sexo
+            </label>
+            <select ng-model="dev.sex"
+                    class="form-control"
+                    id="sexo"
+                    required>
+                <option value=""
+                        selected="selected">
+                    --Selecione Uma Opção--
+                </option>
+                <option value="0">Outro</option>
+                <option value="1">Masculino</option>
+                <option value="2">Feminino</option>
+
+            </select>
+        </div>
+
+        <div class="col-sm-1">
+            <label for="idade">
+                Idade
+            </label>
+            <input id="idade"
+                   ng-model="dev.age"
+                   ng-disabled="true"
+                   class="form-control" />
+        </div>
+
+        <div class="col-sm-4">
+            <label for="nascimento">
+                Data de Nascimento
+            </label>
+            <input type="date"
+                   id="nascimento"
+                   date-input
+                   class="form-control"
+                   ng-model="dev.birthDate"
+                   required />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <label for="hobby">
+                Hobby
+            </label>
+
+            <textarea ng-model="dev.hobby"
+                      id="hobby"
+                      required
+                      maxlength="2000"
+                      spellcheck="true"
+                      style="height:200px"
+                      class="form-control scrollabletextbox"></textarea>
+        </div>
+    </div>
+</form>
