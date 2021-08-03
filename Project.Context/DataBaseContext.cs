@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+using Project.Context.TypesConfiguration;
 using Project.Domain.Context;
+using Project.Domain.Developers;
 
 namespace Project.Context
 {
@@ -10,8 +12,11 @@ namespace Project.Context
         {
         }
 
+        public DbSet<Developer> Developers { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.ApplyConfiguration(new DeveloperTypeConfiguration());
         }
     }
 }

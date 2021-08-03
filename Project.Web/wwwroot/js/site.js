@@ -1,4 +1,19 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿var app = angular.module('app', []);
+(function () {
+    app.controller('developerController', ['$scope', '$http', function (scope, http) {
+        //apiUrl = "http://localhost/api/login";
+        //scope.controller = "loginController";
 
-// Write your JavaScript code.
+        //scope.login = function () {
+        //    user = {
+        //        login: scope.userName,
+        //        password: scope.password
+        //    };
+        //    http.post(apiUrl, user)
+        //        .then(function () {
+        //            scope.log("login succesfull!")
+        //        });
+        //};
+
+    }]);
+})();
