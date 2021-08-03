@@ -21,17 +21,7 @@ namespace Project.Web.Api
         public DevelopersController(IDataBaseContext context)
         {
             _context = context;
-        }
-
-        /// <summary>
-        /// Get all devs
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public IActionResult GetDevelopers(int skip = 0, int take = 10)
-        {
-            return Ok(_context.Developers.Skip(skip).Take(take).ToList());
-        }
+        }           
 
         /// <summary>
         /// Get devs with filters
@@ -53,7 +43,7 @@ namespace Project.Web.Api
             if (sex != null)
                 devs = devs.Where(d => d.Sex == sex);
 
-            if (devs.Count() < 1)
+            if (!devs.Any())
                 return NotFound();
 
             return Ok(devs);

@@ -5,6 +5,57 @@
     <title>HOME</title>
 </head>
 <body>
-    aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    <div class="table"
+         ng-init="getDevs()">
+        <div class="row"
+             style="border-bottom:groove">
+            <div class="col-sm-3">
+                Nome
+            </div>
+
+            <div class="col-sm-4">
+                Hobby
+            </div>
+
+            <div class="col-sm-2">
+                Sexo
+            </div>
+
+            <div class="col-sm-2">
+                Idade
+            </div>
+
+            <div class="col-sm-1">
+
+            </div>
+        </div>
+
+        <div class="row"
+             ng-repeat="dev in devs"
+             style="border-bottom:groove">
+            <div class="col-sm-3">
+                {{dev.name}}
+            </div>
+
+            <div class="col-sm-4">
+                {{dev.hobby}}
+            </div>
+
+            <div class="col-sm-2">
+                {{dev.sex}}
+            </div>
+
+            <div class="col-sm-2">
+                {{dev.age}}
+            </div>
+
+            <div class="col-sm-1">
+                <button class="btn btn-sm btn-outline-info"
+                        ng-click="details(dev.id)">
+                    <i class="fa fa-eye"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

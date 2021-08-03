@@ -64,6 +64,18 @@ namespace Project.Web
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.Use(async (context, next) =>
+            {
+                await next();
+                if (context.Response.StatusCode == 404)
+                {
+                    context.Request.Path = "/Home";
+                    context.Response.StatusCode = 200;
+                    await next();
+                }
+            });
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -78,23 +90,7 @@ namespace Project.Web
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gazin");
 
-            });
-
-            DefaultFilesOptions options = new DefaultFilesOptions();
-            options.DefaultFileNames.Clear();
-            options.DefaultFileNames.Add("/Templates/Home/index.html");
-            app.UseDefaultFiles(options);
-
-            app.Use(async (context, next) =>
-            {
-                await next();
-                if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
-                {
-                    context.Request.Path = "/Templates/Home/index.html";
-                    context.Response.StatusCode = 200;
-                    await next();
-                }
-            });
+            }); 
 
             app.UseEndpoints(endpoints =>
             {

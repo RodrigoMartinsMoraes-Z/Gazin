@@ -9,8 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Templates\Home\dev-detail.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Templates\Home\dev-detail.html" />
     <None Include="wwwroot\Templates\Home\index.html" />
-    <None Include="wwwroot\Templates\Login\index.html" />
   </ItemGroup>
 
   <ItemGroup>

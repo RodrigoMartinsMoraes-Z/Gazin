@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Title</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/font-awesome/css/all.min.css" />
     <base href="/">
 </head>
 <body ng-app="app">
@@ -42,10 +42,11 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/font-awesome/js/all.min.js"></script>
     <script src="~/angular.js/angular.min.js"></script>
     <script src="~/angular-route/angular-route.min.js"></script>
-    <script src="~/angular-route/angular-route-module.js"></script>
+    <script src="~/Controllers/DevController.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
